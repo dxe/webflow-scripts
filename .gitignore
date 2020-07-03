@@ -1,3 +1,6 @@
+# mac os file
+.DS_Store
+
 # build dir
 build/
 
