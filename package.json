@@ -1,0 +1,25 @@
+{
+  "name": "webflow-scripts",
+  "version": "1.0.0",
+  "description": "To update scripts:",
+  "main": "gulp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dxe/webflow-scripts.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dxe/webflow-scripts/issues"
+  },
+  "homepage": "https://github.com/dxe/webflow-scripts#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-minify": "^3.1.0",
+    "gulp-rename": "^2.0.0"
+  }
+}
