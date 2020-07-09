@@ -117,7 +117,7 @@ function initMap() {
             infoWindow.open(map, marker);
           });
           // insert chapter into accordian
-          chapterDataAccordian = `
+          let chapterDataAccordian = `
             <div class="chapter-list-item">
                <p class="paragraph-chapter-list">${chapter.Flag} ${chapter.Name}<br></p>
                <div class="chapter-icons-div">
