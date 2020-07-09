@@ -1,6 +1,6 @@
 var emailForm = document.getElementById("email-form");
 
-if (emailForm.length) {
+if (emailForm) {
 
 	emailForm.addEventListener("submit", function(event){
 
