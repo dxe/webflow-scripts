@@ -1,11 +1,13 @@
+// this script currently requries jqeury for the ready function
+
 $(document).ready(function() {
 	// inject html into button to add icon
-	$("a[data-action='find-chapter']").html(`<i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;Find nearest chapter`);
+	document.getElementById("find-chapter-btn").innerHTML = `<i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;Find nearest chapter`;
 });
 
-$("a[data-action='find-chapter']").click(function() {
+document.getElementById("find-chapter-btn").addEventListener("click", function(){
 	// let user know that it's loading
-	$("a[data-action='find-chapter']").text("Locating...");
+	document.getElementById("find-chapter-btn").innerHTML = "Locating...";
 	geolocate();
 });
 
@@ -22,7 +24,7 @@ function onGeolocateSuccess(coordinates) {
     map.panTo(userCoords);
     map.setZoom(6);
 
-  	$("a[data-action='find-chapter']").html(`<i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;Find nearest chapter`);
+  	document.getElementById("find-chapter-btn").innerHTML = `<i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;Find nearest chapter`;
 
   	// find nearest chapter marker
   	let nearestMarker = markers.reduce(function (prev, curr) {
@@ -38,12 +40,17 @@ function onGeolocateError(error) {
 
 	if (error.code === 1) {
 	  // they said no
-	  $("a[data-action='find-chapter']").text("You denied location sharing.");
-	} else if (error.code === 2) {
+	  document.getElementById("find-chapter-btn").innerHTML = "You denied location sharing.";
+	  return;
+	}
+	if (error.code === 2) {
 	  // position unavailable
-	  $("a[data-action='find-chapter']").text("Failed.");
-	} else if (error.code === 3) {
+	  document.getElementById("find-chapter-btn").innerHTML = "Failed.";
+	  return;
+	}
+	if (error.code === 3) {
 	  // timeout
-	  $("a[data-action='find-chapter']").text("Timeout.");
+	  document.getElementById("find-chapter-btn").innerHTML = "Timeout.";
+	  return;
 	}
 }

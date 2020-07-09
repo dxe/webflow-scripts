@@ -91,10 +91,10 @@ function initMap() {
           var infoContent =  `<div class="info-window"><div style="padding-bottom: 10px;"><center><span style="font-family: Inter,sans-serif; font-size: 1.2em;">${chapter.Name}</span></center></div>`
           infoContent += `<div class="row">`
           // add relevant icons
-          if (chapter.FbURL) infoContent += `<div class="map-icon-column"><center><a href="${chapter.FbURL}" target="_blank"><div class="map-icon">${fbIcon}</div></a></center></div>`
-          if (chapter.TwitterURL) infoContent += `<div class="map-icon-column"><center><a href="${chapter.TwitterURL}" target="_blank"><div class="map-icon">${twitterIcon}</div></a></center></div>`
-          if (chapter.InstaURL) infoContent += `<div class="map-icon-column"><center><a href="${chapter.InstaURL}" target="_blank"><div class="map-icon">${instaIcon}</div></a></center></div>`
-          if (chapter.Email) infoContent += `<div class="map-icon-column"><center><a href="mailto:${chapter.Email}" target="_blank"><div class="map-icon">${mailIcon}</div></a></center></div>`
+          infoContent += (chapter.FbURL) ? `<div class="map-icon-column"><center><a href="${chapter.FbURL}" target="_blank"><div class="map-icon">${fbIcon}</div></a></center></div>` : ""
+          infoContent += (chapter.TwitterURL) ? `<div class="map-icon-column"><center><a href="${chapter.TwitterURL}" target="_blank"><div class="map-icon">${twitterIcon}</div></a></center></div>` : ""
+          infoContent += (chapter.InstaURL) ? `<div class="map-icon-column"><center><a href="${chapter.InstaURL}" target="_blank"><div class="map-icon">${instaIcon}</div></a></center></div>` : ""
+          infoContent += (chapter.Email) ? `<div class="map-icon-column"><center><a href="mailto:${chapter.Email}" target="_blank"><div class="map-icon">${mailIcon}</div></a></center></div>` : ""
           infoContent += `</div></div>`
           var point = new google.maps.LatLng(
             parseFloat(chapter.Lat),
@@ -131,22 +131,22 @@ function initMap() {
           let regionDiv = "";
           switch(region) {
             case "Asia-Pacific":
-              regionDiv = "#chapters-asia";
+              regionDiv = "chapters-asia";
               break;
             case "Central & South America":
-              regionDiv = "#chapters-central";
+              regionDiv = "chapters-central";
               break;
             case "Europe":
-              regionDiv = "#chapters-europe";
+              regionDiv = "chapters-europe";
               break;
             case "Middle East & Africa":
-              regionDiv = "#chapters-middle";
+              regionDiv = "chapters-middle";
               break;
             case "North America":
-              regionDiv = "#chapters-north";
+              regionDiv = "chapters-north";
               break;
           }
-          if (regionDiv != "") $(regionDiv).append(chapterDataAccordian);
+          if (regionDiv != "") document.getElementById(regionDiv).innerHTML += chapterDataAccordian;
         })
 
       }

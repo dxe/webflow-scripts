@@ -1,3 +1,6 @@
+// THIS SCRIPT REQUIRES JQUERY (FULL) FOR THE .fadeto FUNCTION
+// <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 // function to get cookies (source: https://www.w3schools.com/js/js_cookies.asp)
 function getCookie(cname) {
   var name = cname + "=";
@@ -57,7 +60,7 @@ function getAllChapters() {
 			chapterDataHTML += "</div>"
 		}
 		// append to div on page
-		$("#chapter-regions-wrapper").append(chapterDataHTML);
+		document.getElementById("chapter-regions-wrapper").innerHTML += chapterDataHTML;
 	})
 	.catch(error => {
 		console.warn(error);
@@ -66,7 +69,7 @@ function getAllChapters() {
 
 $(document).ready(function() {
 	// inject html into button to add icon
-	$("a[data-action='find-chapter']").html(`<i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;Find my chapter`);
+	document.getElementById("find-chapter-btn").innerHTML = `<i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;Find my chapter`;
 	// read cookie for location if saved
 	var chapterName = getCookie("chapterName");
 	var chapterID = getCookie("chapterID");
@@ -84,24 +87,23 @@ $(document).ready(function() {
 
 function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag) {
 	// update selected name
-	$("#selected-chapter").text(chapterFlag + " " + chapterName);
+	document.getElementById("selected-chapter").innerText = chapterFlag + " " + chapterName;
 	// close the chapter selector secreen
 	hideChapterSelector();
 	// if no FB url for the chapter, we should use default dxe url
-	if (facebookURL === "") facebookURL = "https://facebook.com/directactioneverywhere";
+	facebookURL = facebookURL ? facebookURL : "https://facebook.com/directactioneverywhere";
 	// set cookie
 	document.cookie = `chapterName=${encodeURIComponent(chapterName)}`;
 	document.cookie = `chapterID=${encodeURIComponent(chapterID)}`;
 	document.cookie = `fbURL=${encodeURIComponent(facebookURL)}`;
 	document.cookie = `chapterFlag=${encodeURIComponent(chapterFlag)}`;
 	// update FB button
-	$("a[data-action='view-facebook']").attr("href", facebookURL + "/events");
-	$("a[data-action='view-facebook']").text(`View ${chapterName} on Facebook`);
+	document.getElementById("view-fb-btn").href = facebookURL + "/events";
+	document.getElementById("view-fb-btn").innerText = `View ${chapterName} on Facebook`;
 	// clear events currently shown
-	$("#event-items-wrapper").empty();
+	document.getElementById("event-items-wrapper").innerHTML = "";
 	// update event listing shown using chapter fb id
 	let startTime = new Date().addHours(-1).toISOString().substring(0,16);
-	console.log(`Getting events that start at ${startTime} or later.`)
 	let endtime = new Date().addHours(720).toISOString().substring(0,16);
 	fetch(`https://adb.dxe.io/fb_events/${chapterID}?start_time=${startTime}&end_time=${endtime}`)
 	.then(res => {
@@ -110,7 +112,7 @@ function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag)
 	.then(events => {
 		// if 0 events & chapter id not configured, then display a message
 		if (events === null && chapterID == 0) {
-			$("#event-items-wrapper").append(`
+			document.getElementById("event-items-wrapper").innerHTML += `
 				<div class="w-dyn-item">
 			        <div class="event-div">
 			            <div class="event-info-div">
@@ -120,12 +122,12 @@ function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag)
 			            </div>
 			        </div>
 			    </div>
-				`)
+				`
 			return;
 		}
 		// if 0 events, say no "upcoming" events found
 		if (events === null) {
-			$("#event-items-wrapper").append(`
+			document.getElementById("event-items-wrapper").innerHTML += `
 				<div class="w-dyn-item">
 			        <div class="event-div">
 			            <div class="event-info-div">
@@ -134,7 +136,7 @@ function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag)
 			            </div>
 			        </div>
 			    </div>
-				`)
+				`;
 			return;
 		}
 		// append #event-items-wrapper
@@ -144,7 +146,7 @@ function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag)
 			let localStartTime = formatAMPM(new Date(event.StartTime));
 			let facebookEventURL = `https://www.facebook.com/events/${event.ID}`;
 			if (!event.Cover) event.Cover = 'https://ec2.dxe.io/img/default_cover.jpg';
-			$("#event-items-wrapper").append(`
+			document.getElementById("event-items-wrapper").innerHTML += `
 				<div class="w-dyn-item">
 			        <div class="event-div">
 			            <div class="event-image"><a href="${facebookEventURL}" target="_blank"><img width="1010" src="${event.Cover}" class="fb-event-thumbnail"></a></div>
@@ -157,7 +159,7 @@ function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag)
 			            </div>
 			        </div>
 			    </div>
-				`)
+				`;
 		})
 	})
 	.catch(error => {
@@ -167,7 +169,6 @@ function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag)
 
 function loadFeaturedEvent() {
 	let startTime = new Date().addHours(-1).toISOString().substring(0,16);
-	console.log(`Getting events that start at ${startTime} or later.`)
 	let endtime = new Date().addHours(720).toISOString().substring(0,16);
 	fetch(`https://adb.dxe.io/fb_events/287332515138353?start_time=${startTime}&end_time=${endtime}`)
 	.then(res => {
@@ -206,9 +207,9 @@ function loadFeaturedEvent() {
 	});
 }
 
-$("a[data-action='find-chapter']").click(function() {
+document.getElementById("find-chapter-btn").addEventListener("click", function(){
 	// let user know that it's loading
-	$("a[data-action='find-chapter']").text("Locating...");
+	document.getElementById("find-chapter-btn").innerHTML = "Locating...";
 	geolocate();
 });
 
@@ -236,7 +237,7 @@ function loadNearestEvents(lat = 0, lng = 0) {
       		);
 		}
 		updateSelectedChapter(data[0].Name, data[0].ID, data[0].FbURL, data[0].Flag);
-		$("a[data-action='find-chapter']").html(`<i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;Find my chapter`);
+		document.getElementById("find-chapter-btn").innerHTML = `<i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;Find my chapter`;
 	})
 	.catch(error => {
 		console.warn(error);
@@ -244,18 +245,23 @@ function loadNearestEvents(lat = 0, lng = 0) {
 }
 
 function onGeolocateError(error) {
-  console.warn(error.code, error.message);
- 
-  if (error.code === 1) {
-    // they said no
-    $("a[data-action='find-chapter']").text("You denied location sharing.");
-  } else if (error.code === 2) {
-    // position unavailable
-    $("a[data-action='find-chapter']").text("Failed.");
-  } else if (error.code === 3) {
-    // timeout
-    $("a[data-action='find-chapter']").text("Timeout.");
-  }
+	console.warn(error.code, error.message);
+
+	if (error.code === 1) {
+	  // they said no
+	  document.getElementById("find-chapter-btn").innerHTML = "You denied location sharing.";
+	  return;
+	}
+	if (error.code === 2) {
+	  // position unavailable
+	  document.getElementById("find-chapter-btn").innerHTML = "Failed.";
+	  return;
+	}
+	if (error.code === 3) {
+	  // timeout
+	  document.getElementById("find-chapter-btn").innerHTML = "Timeout.";
+	  return;
+	}
 }
 
 function showChapterSelector() {
