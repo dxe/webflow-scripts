@@ -2,9 +2,11 @@ var gulp = require('gulp');
 var minify = require('gulp-minify');
 var cleanCss = require('gulp-clean-css');
 var rename = require("gulp-rename");
+var babel = require("gulp-babel");
 
 gulp.task('pack-js', function () {    
     return gulp.src('src/*.js')
+        .pipe(babel())
         .pipe(minify({
 		    ext:{
 		        min:'.min.js'
