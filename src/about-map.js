@@ -73,7 +73,7 @@ function initMap() {
   });
 
   // zoom map out more on mobile
-  if (window.matchMedia('screen and (max-width: 768px)').matches) map.setZoom(0);
+  if (window.matchMedia('screen and (max-width: 768px)').matches) map.setZoom(0.52);
 
   const fbIcon = `<img src="https://ec2.dxe.io/img/fb.svg">`;
   const twitterIcon = `<img src="https://ec2.dxe.io/img/twitter.svg">`;
