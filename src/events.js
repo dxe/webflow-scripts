@@ -47,11 +47,10 @@ function getAllChapters() {
 			// new region
 			chapterDataHTML += `<div class="location-title">${region}</div><div class="location-home">`;
 			chapters.forEach(chapter => {
-				// insert chapters into region
 				chapterDataHTML += `
 					<div class="location-button">
 					    <a href="#" onClick="updateSelectedChapter('${chapter.Name}','${chapter.ID}','${chapter.FbURL}','${chapter.Flag}')" class="location-link w-inline-block">
-					        <div class="text-block-10">${chapter.Flag} ${chapter.Name}</div>
+					        <div class="text-block-10">${parseEmoji(chapter.Flag)} ${chapter.Name}</div>
 					    </a>
 					</div>
 					`;
@@ -87,7 +86,7 @@ $(document).ready(function() {
 
 function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag) {
 	// update selected name
-	document.getElementById("selected-chapter").innerText = chapterFlag + " " + chapterName;
+	document.getElementById("selected-chapter").innerHTML = parseEmoji(chapterFlag) + " " + chapterName;
 	// close the chapter selector secreen
 	hideChapterSelector();
 	// if no FB url for the chapter, we should use default dxe url
@@ -273,4 +272,17 @@ function hideChapterSelector() {
 	$(".select-location-custom").fadeTo(200, 0, function() {
 		$(".select-location-custom").css("display", "none");
 	});
+}
+
+document.querySelector('head').innerHTML += '<style>img.emoji { width: 35px; }</style>';
+
+function parseEmoji(emoji) {
+	if (window.navigator.userAgent.indexOf("Windows") === -1) return emoji;
+	try {
+    	return twemoji.parse(emoji);
+	}
+	catch(err) {
+		console.log("Twemoji not loaded.");
+	    return emoji;
+	}
 }

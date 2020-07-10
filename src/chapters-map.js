@@ -119,7 +119,7 @@ function initMap() {
           // insert chapter into accordian
           let chapterDataAccordian = `
             <div class="chapter-list-item">
-               <p class="paragraph-chapter-list">${chapter.Flag} ${chapter.Name}<br></p>
+               <p class="paragraph-chapter-list">${parseEmoji(chapter.Flag)} ${chapter.Name}<br></p>
                <div class="chapter-icons-div">
                `
           chapterDataAccordian += (chapter.FbURL) ? `<a href="${chapter.FbURL}" target="_blank" class="w-inline-block"><div class="accordian-icon">${fbIcon}</div></a>` : ""
@@ -156,4 +156,17 @@ function initMap() {
   .catch(error => {
     console.warn(error);
   });
+}
+
+document.querySelector('head').innerHTML += '<style>img.emoji { width: 35px; }</style>';
+
+function parseEmoji(emoji) {
+  if (window.navigator.userAgent.indexOf("Windows") === -1) return emoji;
+  try {
+      return twemoji.parse(emoji);
+  }
+  catch(err) {
+    console.log("Twemoji not loaded.");
+      return emoji;
+  }
 }

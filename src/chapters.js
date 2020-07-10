@@ -20,7 +20,7 @@ function geolocate() {
 function onGeolocateSuccess(coordinates) {
 	const { latitude, longitude } = coordinates.coords;
 	// TODO: CHANGE MAP CENTER & ZOOM
-	userCoords = new google.maps.LatLng(latitude, longitude);
+	let userCoords = new google.maps.LatLng(latitude, longitude);
     map.panTo(userCoords);
     map.setZoom(6);
 
