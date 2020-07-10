@@ -18,8 +18,17 @@ function getCookie(cname) {
 }
 
 $(document).ready(function(){
+
   // read cookie
-  var activeTab = getCookie("activeResourceTab");
+  let activeTab = getCookie("activeResourceTab");
+  // get url params
+  let urlParams = window.location.search;
+  
+  // if design form link sent us here, always show that
+  if (urlParams.indexOf("tab=design-form") != -1 ) {
+    activeTab = "#w-tabs-0-data-w-tab-4";
+  } 
+
   if (activeTab) {
     $(activeTab).click();
   }
