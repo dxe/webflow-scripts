@@ -4,7 +4,8 @@
   "description": "To update scripts:",
   "main": "gulp.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "rsync -azP --rsync-path=\"sudo rsync\" build/  ubuntu@ec2.dxe.io:/var/www/ec2.dxe.io/webflow-scripts"
   },
   "repository": {
     "type": "git",
