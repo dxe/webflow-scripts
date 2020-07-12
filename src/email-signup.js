@@ -1,3 +1,19 @@
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
 var emailForm = document.getElementById("email-form");
 
 if (emailForm) {
@@ -6,20 +22,11 @@ if (emailForm) {
 
 		event.preventDefault();
 
-		var name = document.getElementById("name").value;
-		var firstName = '';
-		var i = name.indexOf(' ');
-		if (i == -1) {
-		    // there are no spaces in userName
-		    firstName = name
-		} else {
-		    firstName = name.slice(0, i);
-		}
-		firstName = encodeURIComponent(firstName);
+		var chapterCookie = encodeURI(getCookie("chapterName"));
 
-		var body = new URLSearchParams(Array.from(new FormData(emailForm))).toString() + `&list=Jx892mirlwaaY8uFHms763uCrw&LastSource=Webflow%20Sign%20Up%20Form&FirstName=${firstName}&hp=`
+		var body = new URLSearchParams(Array.from(new FormData(emailForm))).toString() + `&subscriber-chapter=${chapterCookie}`
 
-		fetch('https://sendy.dxetech.org/subscribe', {
+		fetch('https://ec2.dxe.io/webflow-scripts/subscribe-proxy.php', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded;'
