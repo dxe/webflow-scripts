@@ -1,5 +1,4 @@
 <?php
-require("/home/ubuntu/php-config/adb-forms-config.php");
 require("/home/ubuntu/php-config/sendy-api-config.php");
 
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
@@ -52,7 +51,7 @@ function add_to_sendy($name, $email, $first_name, $list_id) {
     'FirstName' => $first_name,
     'LastSource' => 'Webflow Sign Up Form',
     'hp' => '',
-    'api_key' => $sendy_api_key,
+    'api_key' => $GLOBALS['sendy_api_key'],
     'boolean' => 'true' // gives us a plain text response
   );
   $options = array(
