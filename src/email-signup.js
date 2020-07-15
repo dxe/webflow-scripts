@@ -23,6 +23,8 @@ if (emailForm) {
 		event.preventDefault();
 
 		var chapterCookie = encodeURI(getCookie("chapterName"));
+		
+		if (chapterCookie == "") chapterCookie = "none";
 
 		var body = new URLSearchParams(Array.from(new FormData(emailForm))).toString() + `&subscriber-chapter=${chapterCookie}`
 
