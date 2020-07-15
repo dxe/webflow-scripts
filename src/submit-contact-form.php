@@ -36,9 +36,15 @@ $email = $subject = $message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+  // if subject & message are blank, don't bother sending the email
+
   $email = test_input($conn, $_POST["email"]);
   $subject = test_input($conn, $_POST["subject"]);
   $message = test_input($conn, $_POST["message"]);
+
+  if ($subject == "" && $message == "") {
+    die('No subject or message provided.');
+  }
 
   $emailMsg = "Email: " . $email . "\r\n\r\nSubject: " . $subject . "\r\n\r\nMessage: " . $message;
   $sendTo = 'dxe@directactioneverywhere.com';
