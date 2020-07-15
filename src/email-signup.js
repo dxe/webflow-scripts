@@ -37,6 +37,8 @@ if (emailForm) {
 		})
 		.catch(error => console.error(error))
 
+		_paq.push(['trackEvent', 'Sign Up', 'Sign Up Form Submitted', 'Sign Up Form']);
+
 	});
 
 }
