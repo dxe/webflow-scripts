@@ -67,6 +67,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $emailBody .= $key . ": ";
       $emailBody .= $value . "\r\n\r\n";
     }
+    if ($key == "item-description") {
+      $item_description = $value;
+    }
   }
 
   $sendTo = 'design@directactioneverywhere.com';
@@ -74,6 +77,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $headers .= 'Cc: jake@directactioneverywhere.com' . "\r\n";
   $headers .= "Reply-To:" . "tech@dxe.io" . "\r\n";
   mail($sendTo,"Design Request Form Submitted",$emailBody,$headers);
+
+  $sendTo = 'x+509541481001483@mail.asana.com';
+  $headers = 'From: "Jake Hobbs" ' . "<jake@directactioneverywhere.com>" . "\r\n";
+  $headers .= 'Cc: jake@directactioneverywhere.com' . "\r\n";
+  $headers .= "Reply-To:" . "tech@dxe.io" . "\r\n";
+  mail($sendTo,$item_description,$emailBody,$headers);
 
   echo "Thank you. Your submission has been sent.";
 
