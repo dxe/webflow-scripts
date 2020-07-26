@@ -103,7 +103,7 @@ function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag)
 	document.getElementById("event-items-wrapper").innerHTML = "";
 	// update event listing shown using chapter fb id
 	let startTime = new Date().addHours(-1).toISOString().substring(0,16);
-	let endtime = new Date().addHours(720).toISOString().substring(0,16);
+	let endtime = new Date().addHours(2160).toISOString().substring(0,16);
 	fetch(`https://adb.dxe.io/fb_events/${chapterID}?start_time=${startTime}&end_time=${endtime}`)
 	.then(res => {
 		return res.json();
