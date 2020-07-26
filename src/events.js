@@ -131,7 +131,7 @@ function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag)
 			        <div class="event-div">
 			            <div class="event-info-div">
 			                <div class="event-title">No upcoming events found</div>
-			                <div class="fb-event-info">Sorry, there are no upcoming events for ${chapterName}.</div>
+			                <div class="fb-event-info">Sorry, there are no public upcoming events for ${chapterName}.</div>
 			            </div>
 			        </div>
 			    </div>
