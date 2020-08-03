@@ -18,15 +18,18 @@ require("/home/ubuntu/php-config/recaptcha-webflow-config.php");
         // everything is okay, so keep running the script
     }
     else {
+      http_response_code(400);
        die('Recaptcha failed!');
     }
  }
  else {
+  http_response_code(400);
   die('Invalid recaptcha!');
  }
 
 if(!empty($_POST['name'])) {
   // spam bot got caught by our honey pot!
+  http_response_code(400);
   die('Not permitted.');
 }
 
@@ -73,25 +76,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   $sendTo = 'design@directactioneverywhere.com';
-  $headers = 'From: "DxE Tech Server" ' . "<tech-noreply@directactioneverywhere.com>" . "\r\n";
+  $headers = 'From: "Design Form Submissions" ' . "<tech-noreply@directactioneverywhere.com>" . "\r\n";
   $headers .= 'Cc: jake@directactioneverywhere.com' . "\r\n";
   $headers .= "Reply-To:" . "tech@dxe.io" . "\r\n";
   mail($sendTo,"Design Request Form Submitted",$emailBody,$headers);
 
   $sendTo = 'x+509541481001483@mail.asana.com';
   $headers = 'From: "Jake Hobbs" ' . "<jake@directactioneverywhere.com>" . "\r\n";
-  $headers .= 'Cc: jake@directactioneverywhere.com' . "\r\n";
   $headers .= "Reply-To:" . "tech@dxe.io" . "\r\n";
   mail($sendTo,$item_description,$emailBody,$headers);
 
   echo "Thank you. Your submission has been sent.";
 
+  http_response_code(200);
   die();
 
 }
 
 echo "Error. Please contact tech@dxe.io for support.";
 
+http_response_code(400);
 die();
 
 ?>
