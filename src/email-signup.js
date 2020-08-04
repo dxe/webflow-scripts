@@ -22,6 +22,9 @@ if (emailForm) {
 
 		event.preventDefault();
 
+		$("#signup-submit").attr("disabled", true);
+      	$('#signup-submit').val("Please wait...")
+
 		var chapterCookie = encodeURI(getCookie("chapterName"));
 		
 		if (chapterCookie == "") chapterCookie = "none";
@@ -35,6 +38,15 @@ if (emailForm) {
 			},
 			body: body
 		})
+		.then(res => {
+	        $('#email-form').css('display', 'none');
+	        if (res.status == 200) {
+	          $('.w-form-done').css('display', 'block');
+	        }
+	        else {
+	          $('.w-form-fail').css('display', 'block');
+	        }
+	    })
 		.catch(error => console.error(error))
 
 		_paq.push(['trackEvent', 'Sign Up', 'Sign Up Form Submitted', 'Sign Up Form']);
