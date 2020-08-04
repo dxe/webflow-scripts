@@ -17,9 +17,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     die('No subject or message provided.');
   }
 
-  $emailMsg = "From: " . $email . "\r\n\r\nMessage: " . $message;
+  $emailMsg = "From: " . $email . "<br /><br />Message: " . $message;
   $sendTo = 'dxe@directactioneverywhere.com';
-  $headers = 'From: "DxE Website Contact Form Submissions" ' . "<tech-noreply@directactioneverywhere.com>" . "\r\n";
+  $headers = "MIME-Version: 1.0" . "\r\n"; 
+  $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n"; 
+  $headers .= 'From: "DxE Website Contact Form Submissions" ' . "<tech-noreply@directactioneverywhere.com>" . "\r\n";
   $headers .= 'Cc: jake@directactioneverywhere.com' . "\r\n";
   mail($sendTo, $subject, $emailMsg, $headers);
 
