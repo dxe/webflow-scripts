@@ -31,7 +31,7 @@ function AddToArray ($post_information) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-  if (isset($_POST['requester-email'])) {
+  if (isset($_POST['Requester-Email'])) {
     $data = AddToArray($_POST);
   }
 
@@ -40,25 +40,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   foreach ($data as $key => $value) {
     $key = test_input($conn, $key);
     $value = test_input($conn, $value);
-    if ($key != "name" && $key != "g-recaptcha-response") { // don't include name as it's just a honey pot field
+    if ($key != "name") { // don't include name as it's just a honey pot field
       $emailBody .= $key . ": ";
-      $emailBody .= $value . "\r\n\r\n";
+      $emailBody .= $value . "<br /><br />";
     }
-    if ($key == "item-description") {
-      $item_description = $value;
+    if ($key == "Item-Title") {
+      $item_title = $value;
     }
   }
 
   $sendTo = 'design@directactioneverywhere.com';
-  $headers = 'From: "Design Form Submissions" ' . "<tech-noreply@directactioneverywhere.com>" . "\r\n";
+  $headers = "MIME-Version: 1.0" . "\r\n"; 
+  $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n"; 
+  $headers .= 'From: "Design Form Submissions" ' . "<tech-noreply@directactioneverywhere.com>" . "\r\n";
   $headers .= 'Cc: jake@directactioneverywhere.com' . "\r\n";
   $headers .= "Reply-To:" . "tech@dxe.io" . "\r\n";
   mail($sendTo,"Design Request Form Submitted",$emailBody,$headers);
 
   $sendTo = 'x+509541481001483@mail.asana.com';
   $headers = 'From: "Jake Hobbs" ' . "<jake@directactioneverywhere.com>" . "\r\n";
-  $headers .= "Reply-To:" . "tech@dxe.io" . "\r\n";
-  mail($sendTo,$item_description,$emailBody,$headers);
+  mail($sendTo,$item_title,$emailBody,$headers);
 
   echo "Thank you. Your submission has been sent.";
 
