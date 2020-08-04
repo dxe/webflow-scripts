@@ -58,7 +58,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   mail($sendTo,"Design Request Form Submitted",$emailBody,$headers);
 
   $sendTo = 'x+509541481001483@mail.asana.com';
-  $headers = 'From: "Jake Hobbs" ' . "<jake@directactioneverywhere.com>" . "\r\n";
+  $headers = "MIME-Version: 1.0" . "\r\n"; 
+  $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n"; 
+  $headers .= 'From: "Jake Hobbs" ' . "<jake@directactioneverywhere.com>" . "\r\n";
   mail($sendTo,$item_title,$emailBody,$headers);
 
   echo "Thank you. Your submission has been sent.";
