@@ -21,8 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $sendTo = 'dxe@directactioneverywhere.com';
   $headers = "MIME-Version: 1.0" . "\r\n"; 
   $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n"; 
-  $headers .= 'From: "DxE Website Contact Form Submissions" ' . "<tech-noreply@directactioneverywhere.com>" . "\r\n";
+  $headers .= 'From: "DxE Website Contact Form Submission" ' . "<tech-noreply@directactioneverywhere.com>" . "\r\n";
   $headers .= 'Cc: jake@directactioneverywhere.com' . "\r\n";
+  if ($email != "") {
+    $headers .= "Reply-To:" . $email . "\r\n";
+  }
   mail($sendTo, $subject, $emailMsg, $headers);
 
   echo "Thank you for your submission.";
