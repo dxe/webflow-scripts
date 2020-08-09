@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data = AddToArray($_POST);
   }
 
-  $emailBody = "";
+  $emailBody = $reply_to = "";
 
   foreach ($data as $key => $value) {
     $key = test_input($conn, $key);
@@ -47,6 +47,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($key == "Item-Title") {
       $item_title = $value;
     }
+    // Requester-Email should be the reply to address
+    if ($key == "Requester-Email") {
+      $reply_to = $value;
+    }
   }
 
   $sendTo = 'design@directactioneverywhere.com';
@@ -54,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n"; 
   $headers .= 'From: "Design Form Submissions" ' . "<tech-noreply@directactioneverywhere.com>" . "\r\n";
   $headers .= 'Cc: jake@directactioneverywhere.com' . "\r\n";
-  $headers .= "Reply-To:" . "tech@dxe.io" . "\r\n";
+  $headers .= "Reply-To:" . $reply_to . "\r\n";
   mail($sendTo,"Design Request Form Submitted",$emailBody,$headers);
 
   $sendTo = 'x+509541481001483@mail.asana.com';
