@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data = AddToArray($_POST);
   }
 
-  $emailBody = $reply_to = "";
+  $emailBody = $reply_to = $from_name = $item_title = "";
 
   foreach ($data as $key => $value) {
     $key = test_input($conn, $key);
@@ -51,15 +51,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($key == "Requester-Email") {
       $reply_to = $value;
     }
+    // Requester-Name should be the from name
+    if ($key == "Requester-Name") {
+      $from_name = $value;
+    }
   }
 
   $sendTo = 'design@directactioneverywhere.com';
   $headers = "MIME-Version: 1.0" . "\r\n"; 
   $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n"; 
-  $headers .= 'From: "Design Form Submissions" ' . "<tech-noreply@directactioneverywhere.com>" . "\r\n";
+  $headers .= 'From: ' . $from_name . " <tech-noreply@directactioneverywhere.com>" . "\r\n";
   $headers .= 'Cc: jake@directactioneverywhere.com' . "\r\n";
   $headers .= "Reply-To:" . $reply_to . "\r\n";
-  mail($sendTo,"Design Request Form Submitted",$emailBody,$headers);
+  mail($sendTo,"Design Request: " . $item_title,$emailBody,$headers);
 
   $sendTo = 'x+509541481001483@mail.asana.com';
   $headers = "MIME-Version: 1.0" . "\r\n"; 
