@@ -108,9 +108,9 @@ function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag)
 	.then(res => {
 		return res.json();
 	})
-	.then(events => {
+	.then(eventData => {
 		// if 0 events & chapter id not configured, then display a message
-		if (events === null && chapterID == 0) {
+		if (eventData.events === null && chapterID == 0) {
 			document.getElementById("event-items-wrapper").innerHTML += `
 				<div class="w-dyn-item">
 			        <div class="event-div">
@@ -125,7 +125,7 @@ function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag)
 			return;
 		}
 		// if 0 events, say no "upcoming" events found
-		if (events === null) {
+		if (eventData.events === null) {
 			document.getElementById("event-items-wrapper").innerHTML += `
 				<div class="w-dyn-item">
 			        <div class="event-div">
@@ -138,8 +138,18 @@ function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag)
 				`;
 			return;
 		}
+		// if we received events, but no local events are found, it means we are only showing online events
+		if (!eventData.local_events_found) {
+			document.getElementById("event-items-wrapper").innerHTML += `
+				<div>
+			        <h3>No local events were found for your chapter.</h3>
+			        <p>But here are some online events:</p>
+			        <p>&nbsp;</p>
+			    </div>
+				`;
+		}
 		// append #event-items-wrapper
-		events.forEach(event => {
+		eventData.events.forEach(event => {
 			const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 			let localStartDate = new Date(event.StartTime).toLocaleDateString(undefined, options);
 			let localStartTime = formatAMPM(new Date(event.StartTime));
@@ -173,11 +183,12 @@ function loadFeaturedEvent() {
 	.then(res => {
 		return res.json();
 	})
-	.then(events => {
-		if (events === null) {
+	.then(eventData => {
+		// "no local events found" in this context means that there is no upcoming ALC event to feature
+		if (eventData.events === null || !eventData.local_events_found) {
 			return;
 		}
-		let event = events[0];
+		let event = eventData.events[0];
 		// append div.hero-section
 		const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 		let localStartDate = new Date(event.StartTime).toLocaleDateString(undefined, options);

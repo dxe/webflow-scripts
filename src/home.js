@@ -108,9 +108,9 @@ function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag)
 	.then(res => {
 		return res.json();
 	})
-	.then(events => {
+	.then(eventData => {
 		// if 0 events & chapter id not configured, then display a message
-		if (events === null && chapterID == 0) {
+		if (eventData.events === null && chapterID == 0) {
 			document.getElementById("event-items-wrapper").innerHTML += `
 				<div class="w-dyn-item">
 			        <div class="event-div">
@@ -125,7 +125,7 @@ function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag)
 			return;
 		}
 		// if 0 events, say no "upcoming" events found
-		if (events === null) {
+		if (eventData.events === null) {
 			document.getElementById("event-items-wrapper").innerHTML += `
 				<div class="w-dyn-item">
 			        <div class="event-div">
@@ -138,10 +138,20 @@ function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag)
 				`;
 			return;
 		}
-
+		// if we received events, but no local events are found, it means we are only showing online events
+		if (!eventData.local_events_found) {
+			document.getElementById("event-items-wrapper").innerHTML += `
+				<div>
+			        <h3>No local events were found for your chapter.</h3>
+			        <p>But here are some online events:</p>
+			        <p>&nbsp;</p>
+			    </div>
+				`;
+		}
 		// append #event-items-wrapper
-		for (let i = 0; i < 3; i++) { // TODO: add a "limit" param to API so we don't need to get more events than we need for homepage
-			let event = events[i];
+		let eventsToShow = eventData.events.length < 3 ? eventData.events.length : 3;
+		for (let i = 0; i < eventsToShow; i++) { // TODO: add a "limit" param to API so we don't need to get more events than we need for homepage
+			let event = eventData.events[i];
 			const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 			let localStartDate = new Date(event.StartTime).toLocaleDateString(undefined, options);
 			let localStartTime = formatAMPM(new Date(event.StartTime));
