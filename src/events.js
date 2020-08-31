@@ -158,7 +158,7 @@ function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag)
 			document.getElementById("event-items-wrapper").innerHTML += `
 				<div class="w-dyn-item">
 			        <div class="event-div">
-			            <div class="event-image"><a href="${facebookEventURL}" target="_blank"><img width="1010" src="${event.Cover}" class="fb-event-thumbnail"></a></div>
+			            <div class="event-image"><a href="${facebookEventURL}" target="_blank"><img width="1010" src="${event.Cover}" onerror="eventImageError(this)" class="fb-event-thumbnail"></a></div>
 			            <div class="event-info-div">
 			                <div class="event-title">${event.Name}</div>
 			                <div class="fb-event-info">${localStartDate} at ${localStartTime}</div>
@@ -174,6 +174,12 @@ function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag)
 	.catch(error => {
 		console.warn(error);
 	});
+}
+
+function eventImageError(image) {
+	console.log("Event image failed to load! Someone probably deleted an event or made it private.");
+	//console.log(image);
+	image.parentNode.parentNode.parentNode.parentNode.style.display='none';
 }
 
 function loadFeaturedEvent() {
