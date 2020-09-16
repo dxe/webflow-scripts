@@ -75,12 +75,12 @@ $(document).ready(function() {
 	var fbURL = getCookie("fbURL");
 	var chapterFlag = getCookie("chapterFlag");
 	loadFeaturedEvent();
-		if (chapterName && chapterID && fbURL && chapterFlag) {
-			updateSelectedChapter(chapterName, chapterID, fbURL, chapterFlag);
-		} else {
-			loadNearestEvents();
-		}
-		// populate chapter selector with current chapters
+	if (chapterName && chapterID && fbURL && chapterFlag) {
+		updateSelectedChapter(chapterName, chapterID, fbURL, chapterFlag);
+	} else {
+		loadNearestEvents();
+	}
+	// populate chapter selector with current chapters
 	getAllChapters();
 });
 
