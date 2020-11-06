@@ -26,22 +26,23 @@ if ($i == FALSE) {
     $firstName = substr($name, 0, $i);
 }
 
-// add to global sendy list
-add_to_sendy($name, $email, $firstName, "Jx892mirlwaaY8uFHms763uCrw");
-echo "Subscribed to Global. ";
-
 // add to sf bay sendy list if chapter is sf bay
 // IF chapter == SF Bay Area
 if ($chapter == "SF Bay Area") {
-  add_to_sendy($name, $email, $firstName, "7xHfg85E19lj763ubrr95e1g");
+  $chapter = 'sfbay';
+  add_to_sendy($name, $email, $firstName, "7xHfg85E19lj763ubrr95e1g", $chapter);
   echo "Subscribed to SF Bay. ";
 }
+
+// add to global sendy list
+add_to_sendy($name, $email, $firstName, "Jx892mirlwaaY8uFHms763uCrw", $chapter);
+echo "Subscribed to Global. ";
 
 // close connection
 http_response_code(200);
 die();
 
-function add_to_sendy($name, $email, $first_name, $list_id) {
+function add_to_sendy($name, $email, $first_name, $list_id, $chapter) {
   // make request to sendy
   $url = 'https://sendy.dxetech.org/subscribe';
   $data = array(
@@ -50,6 +51,7 @@ function add_to_sendy($name, $email, $first_name, $list_id) {
     'list' => $list_id,
     'FirstName' => $first_name,
     'LastSource' => 'Webflow Sign Up Form',
+    'Chapter' => $chapter,
     'hp' => '',
     'api_key' => $GLOBALS['sendy_api_key'],
     'boolean' => 'true' // gives us a plain text response
