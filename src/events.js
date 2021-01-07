@@ -37,7 +37,7 @@ function formatAMPM(date) {
 }
 
 function getAllChapters() {
-	fetch(`https://adb.dxe.io/fb_pages`)
+	fetch(`https://adb.dxe.io/regions`)
 	.then(res => {
 		return res.json();
 	})
@@ -104,7 +104,7 @@ function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag)
 	// update event listing shown using chapter fb id
 	let startTime = new Date().addHours(-1).toISOString().substring(0,16);
 	let endtime = new Date().addHours(2160).toISOString().substring(0,16);
-	fetch(`https://adb.dxe.io/fb_events/${chapterID}?start_time=${startTime}&end_time=${endtime}`)
+	fetch(`https://adb.dxe.io/external_events/${chapterID}?start_time=${startTime}&end_time=${endtime}`)
 	.then(res => {
 		return res.json();
 	})
@@ -185,7 +185,7 @@ function eventImageError(image) {
 function loadFeaturedEvent() {
 	let startTime = new Date().addHours(-1).toISOString().substring(0,16);
 	let endtime = new Date().addHours(720).toISOString().substring(0,16);
-	fetch(`https://adb.dxe.io/fb_events/287332515138353?start_time=${startTime}&end_time=${endtime}`)
+	fetch(`https://adb.dxe.io/external_events/287332515138353?start_time=${startTime}&end_time=${endtime}`)
 	.then(res => {
 		return res.json();
 	})
@@ -241,7 +241,7 @@ function onGeolocateSuccess(coordinates) {
 }
 
 function loadNearestEvents(lat = 0, lng = 0) {
-	fetch(`https://adb.dxe.io/fb_page/${lat},${lng}`)
+	fetch(`https://adb.dxe.io/chapters/${lat},${lng}`)
 	.then(res => {
 		return res.json();
 	})

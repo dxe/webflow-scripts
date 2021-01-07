@@ -82,7 +82,7 @@ function initMap() {
 
   window.markers = [];
 
-  fetch(`https://adb.dxe.io/fb_pages`)
+  fetch(`https://adb.dxe.io/regions`)
     .then(res => {
     return res.json();
   })
