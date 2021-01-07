@@ -155,6 +155,8 @@ function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag)
 			let localStartTime = formatAMPM(new Date(event.StartTime));
 			let facebookEventURL = `https://www.facebook.com/events/${event.ID}`;
 			if (!event.Cover) event.Cover = 'https://ec2.dxe.io/img/default_cover.jpg';
+			let rsvpBlock = `<a href="${facebookEventURL}" style="display: inline; font-size: 16px;" class="link" target="_blank">RSVP on Facebook</a>`
+			if (event.EventbriteURL) rsvpBlock += `  |  <a href="${event.EventbriteURL}" style="display: inline; font-size: 16px;" class="link" target="_blank">RSVP on Eventbrite</a>`
 			document.getElementById("event-items-wrapper").innerHTML += `
 				<div class="w-dyn-item">
 			        <div class="event-div">
@@ -164,7 +166,7 @@ function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag)
 			                <div class="fb-event-info">${localStartDate} at ${localStartTime}</div>
 			                <div class="fb-event-info">${event.LocationName}</div>
 			                <div class="fb-event-info">${event.AttendingCount} attending | ${event.InterestedCount} interested</div>
-			                <div class="fb-event-info"><a href="${facebookEventURL}" class="link" target="_blank">RSVP on Facebook</a></div>
+			                <div class="fb-event-info">${rsvpBlock}</div>
 			            </div>
 			        </div>
 			    </div>
