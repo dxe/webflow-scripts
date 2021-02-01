@@ -102,8 +102,8 @@ function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag)
 	// clear events currently shown
 	document.getElementById("event-items-wrapper").innerHTML = "";
 	// update event listing shown using chapter fb id
-	let startTime = new Date().addHours(-1).toISOString().substring(0,16);
-	let endtime = new Date().addHours(2160).toISOString().substring(0,16);
+	let startTime = new Date().addHours(-1).toISOString();
+	let endtime = new Date().addHours(2160).toISOString();
 	fetch(`https://adb.dxe.io/external_events/${chapterID}?start_time=${startTime}&end_time=${endtime}`)
 	.then(res => {
 		return res.json();
@@ -185,8 +185,8 @@ function eventImageError(image) {
 }
 
 function loadFeaturedEvent() {
-	let startTime = new Date().addHours(-1).toISOString().substring(0,16);
-	let endtime = new Date().addHours(720).toISOString().substring(0,16);
+	let startTime = new Date().addHours(-1).toISOString();
+	let endtime = new Date().addHours(720).toISOString();
 	fetch(`https://adb.dxe.io/external_events/287332515138353?start_time=${startTime}&end_time=${endtime}`)
 	.then(res => {
 		return res.json();
