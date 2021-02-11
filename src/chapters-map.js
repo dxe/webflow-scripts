@@ -75,10 +75,10 @@ function initMap() {
   // zoom map out more on mobile
   if (window.matchMedia('screen and (max-width: 768px)').matches) map.setZoom(0.52);
 
-  const fbIcon = `<img src="https://ec2.dxe.io/img/fb.svg">`;
-  const twitterIcon = `<img src="https://ec2.dxe.io/img/twitter.svg">`;
-  const instaIcon = `<img src="https://ec2.dxe.io/img/insta.svg">`;
-  const mailIcon = `<img src="https://ec2.dxe.io/img/envelope.svg">`;
+  const fbIcon = `<img src="https://dxe-static.s3-us-west-1.amazonaws.com/img/fb.svg">`;
+  const twitterIcon = `<img src="https://dxe-static.s3-us-west-1.amazonaws.com/img/twitter.svg">`;
+  const instaIcon = `<img src="https://dxe-static.s3-us-west-1.amazonaws.com/img/insta.svg">`;
+  const mailIcon = `<img src="https://dxe-static.s3-us-west-1.amazonaws.com/img/envelope.svg">`;
 
   window.markers = [];
 
@@ -104,7 +104,7 @@ function initMap() {
             parseFloat(chapter.Lng)
           );
           var icon = {
-              url: "https://ec2.dxe.io/img/maps-pin2.png",
+              url: "https://dxe-static.s3-us-west-1.amazonaws.com/img/maps-pin2.png",
               scaledSize: new google.maps.Size(30, 30),
               origin: new google.maps.Point(0,0),
               anchor: new google.maps.Point(15, 30)

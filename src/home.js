@@ -156,7 +156,7 @@ function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag)
 			let localStartDate = new Date(event.StartTime).toLocaleDateString(undefined, options);
 			let localStartTime = formatAMPM(new Date(event.StartTime));
 			let facebookEventURL = `https://www.facebook.com/events/${event.ID}`;
-			if (!event.Cover) event.Cover = 'https://ec2.dxe.io/img/default_cover.jpg';
+			if (!event.Cover) event.Cover = 'https://dxe-static.s3-us-west-1.amazonaws.com/img/default_cover.jpg';
 			let rsvpBlock = `<a href="${facebookEventURL}" style="display: inline; font-size: 16px;" class="link" target="_blank">RSVP on Facebook</a>`
 			if (event.EventbriteURL) rsvpBlock += `  |  <a href="${event.EventbriteURL}" style="display: inline; font-size: 16px;" class="link" target="_blank">RSVP on Eventbrite</a>`
 			document.getElementById("event-items-wrapper").innerHTML += `
