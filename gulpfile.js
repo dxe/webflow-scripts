@@ -25,9 +25,4 @@ gulp.task('pack-css', function () {
    		.pipe(gulp.dest('build'));
 });
 
-gulp.task('pack-php', function () {    
-    return gulp.src('src/*.php')
-        .pipe(gulp.dest('build'));
-});
-
 gulp.task('default', gulp.series('pack-js', 'pack-css', 'pack-php'));
