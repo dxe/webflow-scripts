@@ -13,7 +13,7 @@ gulp.task('pack-js', function () {
 		    },
 		    noSource: true
 		}))
-        .pipe(gulp.dest('build'));
+        .pipe(gulp.dest('dist'));
 });
  
 gulp.task('pack-css', function () {    
@@ -22,7 +22,7 @@ gulp.task('pack-css', function () {
         .pipe(rename(function (path) {
 		    path.basename += ".min";
 		}))
-   		.pipe(gulp.dest('build'));
+   		.pipe(gulp.dest('dist'));
 });
 
 gulp.task('default', gulp.series('pack-js', 'pack-css'));
