@@ -14,14 +14,6 @@ function placeCookiesBanner() {
     if (cookiesAccepted == 'false') {
         document.getElementById('cookies-alert').innerHTML = `
             <style>
-                * {
-                    margin: 0;
-                    padding: 0;
-                }
-                body {
-                    width: 100%;
-                    background: gray;
-                }
                 .cookies-banner {
                     font-family: Inter,sans-serif;
                     font-size: smaller;
@@ -35,10 +27,14 @@ function placeCookiesBanner() {
 
                     display: flex;
                     align-items: center;
+                    margin: 0;
+                    padding: 0;
                     
                 }
                 a {
                     color: #333;
+                    margin: 0;
+                    padding: 0;
                 }
                 button {
                     margin-left: 10px;
@@ -46,6 +42,8 @@ function placeCookiesBanner() {
                     color: #fff;
                     padding: 3px 8px;
                     border-radius: 3px;
+                    margin: 0;
+                    padding: 0;
                 }
             </style>
             <div id='cookies-banner'>
