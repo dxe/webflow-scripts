@@ -1,59 +1,57 @@
-document.cookie = `cookieBannerClosed=false`;
+// Create Banner
+const createBanner = () => {
+    // create Container
+    const cookiesAlertCont = document.createElement('div').id = 'cookies-alert';
+    // build inside container
+    document.getElementById('cookies-alert').innerHTML = `
+        <style>
+            .cookiesBanner {
+                font-family: Inter,sans-serif;
+                font-size: smaller;
+                width: 240px;
+                border-radius: 10px;
+                padding: 20px;
+                background: #fff;
+                position: fixed;
+                bottom: 10px;
+                left: 10px;
 
-var cookiesAlertCont = document.createElement('div').id = 'cookies-alert';
-var body = document.getElementsByClassName('body')
-body.appendChild(cookiesAlertCont);
-
-function placeCookiesBanner() {
-    function acceptCookies() {
-        document.cookie = `cookieBannerClosed=true`;
-    }
-
-    var cookiesAccepted = getCookie('cookieBannerClosed')
-
-    if (cookiesAccepted == 'false') {
-        document.getElementById('cookies-alert').innerHTML = `
-            <style>
-                .cookies-banner {
-                    font-family: Inter,sans-serif;
-                    font-size: smaller;
-                    width: 240px;
-                    border-radius: 10px;
-                    padding: 20px;
-                    background: #fff;
-                    position: fixed;
-                    bottom: 10px;
-                    left: 10px;
-
-                    display: flex;
-                    align-items: center;
-                    margin: 0;
-                    padding: 0;
-                    
-                }
-                a {
-                    color: #333;
-                    margin: 0;
-                    padding: 0;
-                }
-                button {
-                    margin-left: 10px;
-                    background: #225dd6;
-                    color: #fff;
-                    padding: 3px 8px;
-                    border-radius: 3px;
-                    margin: 0;
-                    padding: 0;
-                }
-            </style>
-            <div id='cookies-banner'>
-                <p>We use cookies to improve your experience on our site. By using our site, you agree to our <a id="privacy-policy" href="https://www.directactioneverywhere.com/privacy-policy">Privacy Policy</a></p>
-                <button id="accept-cookies" onclick="acceptCookies()">OK</button>
-            </div>
-        `
-    }else {
-        document.getElementById('cookies-alert').style.display = 'none'
-    }
+                display: flex;
+                align-items: center;
+                margin: 0;
+                padding: 0;
+                
+            }
+            .privacyPolicyLink {
+                color: #333;
+                margin: 0;
+                padding: 0;
+            }
+            .acceptCookiesButton {
+                margin-left: 10px;
+                background: #225dd6;
+                color: #fff;
+                padding: 3px 8px;
+                border-radius: 3px;
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+        <div class='cookiesBanner'>
+            <p>We use cookies to improve your experience on our site. By using our site, you agree to our <a class="privacyPolicyLink" href="https://www.directactioneverywhere.com/privacy-policy">Privacy Policy</a></p>
+            <button class="acceptCookiesButton" onclick="acceptCookies()">OK</button>
+        </div>
+    `
+    // add to body
+    const body = document.getElementsByClassName('body')
+    body.appendChild(cookiesAlertCont);
 }
 
-placeCookiesBanner();
+const acceptCookies = () => {
+    document.getElementById('cookie-alert').style.display('none')
+    document.cookie = "cookieBannerClosed=true";
+}
+
+if (document.cookie.indexOf('cookieBannerClosed=') == -1) {
+    createBanner();
+}
