@@ -52,6 +52,6 @@ const acceptCookies = () => {
     document.cookie = "cookieBannerClosed=true";
 }
 
-if (document.cookie.indexOf('cookieBannerClosed=') != -1) {
+if (document.cookie.indexOf('cookieBannerClosed=') == -1) {
     createBanner();
 }
