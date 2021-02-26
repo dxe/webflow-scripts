@@ -1,9 +1,6 @@
 // Create Banner
 const createBanner = () => {
-    // create Container
-    const cookiesAlertCont = document.createElement('div').id = 'cookies-alert';
-    // build inside container
-    document.getElementById('cookies-alert').innerHTML = `
+    const cookiesAlertCont = document.createElement('div').id = 'cookies-alert'.innerHTML = `
         <style>
             .cookiesBanner {
                 font-family: Inter,sans-serif;
@@ -39,12 +36,13 @@ const createBanner = () => {
         </style>
         <div class='cookiesBanner'>
             <p>We use cookies to improve your experience on our site. By using our site, you agree to our <a class="privacyPolicyLink" href="https://www.directactioneverywhere.com/privacy-policy">Privacy Policy</a></p>
-            <button class="acceptCookiesButton" onclick="acceptCookies()">OK</button>
+            <button class="acceptCookiesButton" id='acceptCookiesButton'>OK</button>
         </div>
     `
     // add to body
     const body = document.getElementsByClassName('body')
     body.appendChild(cookiesAlertCont);
+
 }
 
 const acceptCookies = () => {
@@ -55,3 +53,5 @@ const acceptCookies = () => {
 if (document.cookie.indexOf('cookieBannerClosed=') == -1) {
     createBanner();
 }
+
+document.getElementById('acceptCookiesButton').addEventListener('click', acceptCookies)
