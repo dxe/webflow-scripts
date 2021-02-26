@@ -6,7 +6,7 @@ const createBanner = () => {
         <button class="acceptCookiesButton" onclick="acceptCookies()">OK</button>
     `
     // add to body
-    document.getElementById('cookie-alert').innerHTML(cookiesAlert);
+    document.getElementById('cookie-alert').innerHTML = cookiesAlert;
 }
 
 const acceptCookies = () => {
