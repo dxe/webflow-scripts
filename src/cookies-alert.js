@@ -7,6 +7,7 @@ const createBanner = () => {
     `
     // add to body
     document.getElementById('cookie-alert').innerHTML = cookiesAlert;
+    document.getElementById('cookie-alert').style.display = "flex";
 }
 
 const acceptCookies = () => {
