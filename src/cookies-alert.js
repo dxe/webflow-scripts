@@ -40,7 +40,7 @@ const createBanner = () => {
         </div>
     `
     // add to body
-    const body = document.getElementsByClassName('body')
+    let body = document.getElementsByClassName('body')
     body.appendChild(cookiesAlertCont);
 
 }
