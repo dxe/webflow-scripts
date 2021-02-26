@@ -1,7 +1,7 @@
 // Create Banner
 const createBanner = () => {
     // build inside container
-    const cookieAlert = `
+    const cookiesAlert = `
         <style>
             .cookiesBanner {
                 font-family: Inter,sans-serif;
