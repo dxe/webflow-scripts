@@ -12,7 +12,7 @@
     display: flex;
     align-items: center;
     margin: 0;
-    padding: 0;
+    padding: 20px;
     
 }
 .privacyPolicyLink {
@@ -26,6 +26,6 @@
     color: #fff;
     padding: 3px 8px;
     border-radius: 3px;
-    margin: 0;
-    padding: 0;
+    margin: 10px;
+    padding: 10px;
 }
