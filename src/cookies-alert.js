@@ -1,5 +1,5 @@
 // Create Banner
-const createBanner = () => {
+function createBanner() {
     let cookiesAlertCont = document.createElement('div').id = 'cookies-alert'.innerHTML = `
         <style>
             .cookiesBanner {
