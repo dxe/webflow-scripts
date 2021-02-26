@@ -2,46 +2,11 @@
 const createBanner = () => {
     // build inside container
     const cookiesAlert = `
-        <style>
-            .cookiesBanner {
-                font-family: Inter,sans-serif;
-                font-size: smaller;
-                width: 240px;
-                border-radius: 10px;
-                padding: 20px;
-                background: #fff;
-                position: fixed;
-                bottom: 10px;
-                left: 10px;
-
-                display: flex;
-                align-items: center;
-                margin: 0;
-                padding: 0;
-                
-            }
-            .privacyPolicyLink {
-                color: #333;
-                margin: 0;
-                padding: 0;
-            }
-            .acceptCookiesButton {
-                margin-left: 10px;
-                background: #225dd6;
-                color: #fff;
-                padding: 3px 8px;
-                border-radius: 3px;
-                margin: 0;
-                padding: 0;
-            }
-        </style>
-        <div id="cookie-alert" class="cookiesBanner">
-            <p>We use cookies to improve your experience on our site. By using our site, you agree to our <a class="privacyPolicyLink" href="https://www.directactioneverywhere.com/privacy-policy">Privacy Policy</a></p>
-            <button class="acceptCookiesButton" onclick="acceptCookies()">OK</button>
-        </div>
+        <p>We use cookies to improve your experience on our site. By using our site, you agree to our <a class="privacyPolicyLink" href="https://www.directactioneverywhere.com/privacy-policy">Privacy Policy</a>.</p>
+        <button class="acceptCookiesButton" onclick="acceptCookies()">OK</button>
     `
     // add to body
-    document.body.innerHTML += cookiesAlert;
+    document.getElementById('cookie-alert').innerHtml(cookiesAlert);
 }
 
 const acceptCookies = () => {
@@ -50,5 +15,5 @@ const acceptCookies = () => {
 }
 
 if (document.cookie.indexOf('cookieBannerClosed=') == -1) {
-    //createBanner();
+    createBanner();
 }
