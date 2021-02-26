@@ -35,7 +35,7 @@ const createBanner = () => {
                 padding: 0;
             }
         </style>
-        <div id="cookie-alert" class='cookiesBanner'>
+        <div id="cookie-alert" class="cookiesBanner">
             <p>We use cookies to improve your experience on our site. By using our site, you agree to our <a class="privacyPolicyLink" href="https://www.directactioneverywhere.com/privacy-policy">Privacy Policy</a></p>
             <button class="acceptCookiesButton" onclick="acceptCookies()">OK</button>
         </div>
