@@ -1,6 +1,6 @@
 // Create Banner
 const createBanner = () => {
-    const cookiesAlertCont = document.createElement('div').id = 'cookies-alert'.innerHTML = `
+    let cookiesAlertCont = document.createElement('div').id = 'cookies-alert'.innerHTML = `
         <style>
             .cookiesBanner {
                 font-family: Inter,sans-serif;
