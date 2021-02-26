@@ -45,7 +45,7 @@ const createBanner = () => {
 }
 
 const acceptCookies = () => {
-    document.getElementById('cookie-alert').style.display('none');
+    document.getElementById('cookie-alert').style.display = "none";
     document.cookie = "cookieBannerClosed=true";
 }
 
