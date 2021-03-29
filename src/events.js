@@ -92,10 +92,12 @@ function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag)
 	// if no FB url for the chapter, we should use default dxe url
 	facebookURL = facebookURL ? facebookURL : "https://facebook.com/directactioneverywhere";
 	// set cookie
-	document.cookie = `chapterName=${encodeURIComponent(chapterName)}`;
-	document.cookie = `chapterID=${encodeURIComponent(chapterID)}`;
-	document.cookie = `fbURL=${encodeURIComponent(facebookURL)}`;
-	document.cookie = `chapterFlag=${encodeURIComponent(chapterFlag)}`;
+	const secondsPerDay = 60 * 60 * 24;
+	const maxAge = secondsPerDay * 30;
+	document.cookie = `chapterName=${encodeURIComponent(chapterName)}; max-age=${maxAge}; path=/`;
+	document.cookie = `chapterID=${encodeURIComponent(chapterID)}; max-age=${maxAge}; path=/`;
+	document.cookie = `fbURL=${encodeURIComponent(facebookURL)}; max-age=${maxAge}; path=/`;
+	document.cookie = `chapterFlag=${encodeURIComponent(chapterFlag)}; max-age=${maxAge}; path=/`;
 	// update FB button
 	document.getElementById("view-fb-btn").href = facebookURL + "/events";
 	document.getElementById("view-fb-btn").innerText = `View ${chapterName} on Facebook`;
