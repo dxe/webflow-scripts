@@ -185,8 +185,9 @@ function eventImageError(image) {
 }
 
 function loadFeaturedEvent() {
-	let startTime = new Date().addHours(-1).toISOString();
-	let endtime = new Date().addHours(720).toISOString();
+	const sixMonths = 4380;
+	const startTime = new Date().addHours(-1).toISOString();
+	const endtime = new Date().addHours(sixMonths).toISOString();
 	fetch(`https://adb.dxe.io/external_events/287332515138353?start_time=${startTime}&end_time=${endtime}`)
 	.then(res => {
 		return res.json();
