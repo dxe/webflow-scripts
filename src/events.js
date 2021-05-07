@@ -209,13 +209,13 @@ function loadFeaturedEvent() {
 		let featuredEventElement = `
 			<div class="full-container full">
 			   <div class="columns w-row">
-			      <div class="column-9 w-col w-col-6 w-col-stack"><img src="${event.Cover}" class="image-5"></div>
+			      <div class="column-9 w-col w-col-6 w-col-stack"><a href="${event.EventbriteURL}" target="_blank"><img src="${event.Cover}" class="image-5"></a></div>
 			      <div class="column-10 w-col w-col-6 w-col-stack">
 			         <div class="campaign-div transparent">
 			            <div class="tag-line">Featured event</div>
 			            <h2 class="header">${event.Name}</h2>
 			            <p class="paragraph limit">${localStartDate}<br />${event.LocationName}</p>
-			            <div class="buttons-div"><a href="${facebookEventURL}" target="_blank" class="button transparent _25 w-button">Learn more</a></div>
+			            <div class="buttons-div"><a href="${event.EventbriteURL}" target="_blank" class="button transparent _25 w-button">Register</a></div>
 			         </div>
 			      </div>
 			   </div>
