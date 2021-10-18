@@ -254,7 +254,7 @@ function loadNearestEvents(lat = 0, lng = 0) {
 		// if nearest chapter is over 100 miles away, then display a message
 		if (data[0].Distance > 100) {
 			document.getElementById("event-items-wrapper").insertAdjacentHTML("beforeBegin",
-      			`<div style="padding-bottom: 30px;"><h3>The closest chapter to you is ${Math.round(data[0].Distance)} miles away.</h3><p>Contact <a href="mailto:mentoring@dxe.io">mentoring@dxe.io</a> to start a chapter of your own!</p></div>`
+      			`<div style="padding-bottom: 30px;"><h3>The closest chapter to you is ${Math.round(data[0].Distance)} miles away.</h3><p>Fill out <a href="https://adb.dxe.io/international" target="_blank">this form</a> to start a chapter of your own!</p></div>`
       		);
 		}
 		updateSelectedChapter(data[0].Name, data[0].ID, data[0].FbURL, data[0].Flag);
