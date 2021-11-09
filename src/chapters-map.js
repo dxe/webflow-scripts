@@ -98,7 +98,7 @@ function initMap() {
           infoContent += (chapter.TwitterURL) ? `<div class="map-icon-column"><center><a href="${chapter.TwitterURL}" target="_blank"><div class="map-icon">${twitterIcon}</div></a></center></div>` : ""
           infoContent += (chapter.InstaURL) ? `<div class="map-icon-column"><center><a href="${chapter.InstaURL}" target="_blank"><div class="map-icon">${instaIcon}</div></a></center></div>` : ""
           infoContent += (chapter.Email) ? `<div class="map-icon-column"><center><a href="mailto:${chapter.Email}" target="_blank"><div class="map-icon">${mailIcon}</div></a></center></div>` : ""
-          infoContent += `</div></div>`
+          infoContent += `</div><a href="https://dxe.io/join" target="_blank">Join</a></div>`
           var point = new google.maps.LatLng(
             parseFloat(chapter.Lat),
             parseFloat(chapter.Lng)
