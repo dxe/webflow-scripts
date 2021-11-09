@@ -92,7 +92,7 @@ function initMap() {
         chapters.forEach(chapter => {
           // create marker on map w/ info window
           var infoContent =  `<div class="info-window"><div style="padding-bottom: 10px;"><center><span style="font-family: Inter,sans-serif; font-size: 1.2em;">${chapter.Name}</span></center></div>`
-          infoContent += `<div class="row">`
+          infoContent += `<div class="row" style="padding-bottom: 7px;">`
           // add relevant icons
           infoContent += (chapter.FbURL) ? `<div class="map-icon-column"><center><a href="${chapter.FbURL}" target="_blank"><div class="map-icon">${fbIcon}</div></a></center></div>` : ""
           infoContent += (chapter.TwitterURL) ? `<div class="map-icon-column"><center><a href="${chapter.TwitterURL}" target="_blank"><div class="map-icon">${twitterIcon}</div></a></center></div>` : ""
