@@ -215,7 +215,7 @@ function loadFeaturedEvent() {
 			            <div class="tag-line">Featured event</div>
 			            <h2 class="header">${event.Name}</h2>
 			            <p class="paragraph limit">${localStartDate}<br />${event.LocationName}</p>
-			            <div class="buttons-div"><a href="${event.EventbriteURL}" target="_blank" class="button transparent _25 w-button" style="min-width: 0 !important">Register</a></div>
+			            <div class="buttons-div"><a href="${facebookEventURL}" target="_blank" class="button transparent _25 w-button" style="min-width: 0 !important">More info</a></div>
 			         </div>
 			      </div>
 			   </div>
