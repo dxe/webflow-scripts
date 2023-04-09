@@ -74,7 +74,6 @@ $(document).ready(function() {
 	var chapterID = getCookie("chapterID");
 	var fbURL = getCookie("fbURL");
 	var chapterFlag = getCookie("chapterFlag");
-	loadFeaturedEvent();
 	if (chapterName && chapterID && fbURL && chapterFlag) {
 		updateSelectedChapter(chapterName, chapterID, fbURL, chapterFlag);
 	} else {
@@ -174,47 +173,22 @@ function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag)
 			    </div>
 				`;
 		})
-	})
-	.catch(error => {
-		console.warn(error);
-	});
-}
-
-function eventImageError(image) {
-	console.log("Event image failed to load! Someone probably deleted an event or made it private.");
-	//console.log(image);
-	image.parentNode.parentNode.parentNode.parentNode.style.display='none';
-}
-
-function loadFeaturedEvent() {
-	const sixMonths = 4380;
-	const startTime = new Date().addHours(-1).toISOString();
-	const endtime = new Date().addHours(sixMonths).toISOString();
-	fetch(`https://adb.dxe.io/external_events/287332515138353?start_time=${startTime}&end_time=${endtime}`)
-	.then(res => {
-		return res.json();
-	})
-	.then(eventData => {
-		// "no local events found" in this context means that there is no upcoming ALC event to feature
-		if (eventData.events === null || !eventData.local_events_found) {
-			return;
-		}
-		let event = eventData.events[0];
-		// append div.hero-section
-		const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-		let localStartDate = new Date(event.StartTime).toLocaleDateString(undefined, options);
-		let localStartTime = formatAMPM(new Date(event.StartTime));
-		let facebookEventURL = `https://www.facebook.com/events/${event.ID}`;
-		if (!event.Cover) event.Cover = 'https://dxe-static.s3-us-west-1.amazonaws.com/img/default_cover.jpg';
+		// featured event
+		const featuredEvent = eventData.events.find(it => it.Featured);
+		if (!featuredEvent) return;
+		const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+		let localStartDate = new Date(featuredEvent.StartTime).toLocaleDateString(undefined, dateOptions);
+		let facebookEventURL = `https://www.facebook.com/${featuredEvent.ID}`;
+		if (!featuredEvent.Cover) featuredEvent.Cover = 'https://dxe-static.s3-us-west-1.amazonaws.com/img/default_cover.jpg';
 		let featuredEventElement = `
 			<div class="full-container full">
 			   <div class="columns w-row">
-			      <div class="column-9 w-col w-col-6 w-col-stack"><a href="${event.EventbriteURL}" target="_blank"><img src="${event.Cover}" class="image-5"></a></div>
+			      <div class="column-9 w-col w-col-6 w-col-stack"><a href="${featuredEvent.EventbriteURL}" target="_blank"><img src="${featuredEvent.Cover}" class="image-5"></a></div>
 			      <div class="column-10 w-col w-col-6 w-col-stack">
 			         <div class="campaign-div transparent">
 			            <div class="tag-line">Featured event</div>
-			            <h2 class="header">${event.Name}</h2>
-			            <p class="paragraph limit">${localStartDate}<br />${event.LocationName}</p>
+			            <h2 class="header">${featuredEvent.Name}</h2>
+			            <p class="paragraph limit">${localStartDate}<br />${featuredEvent.LocationName}</p>
 			            <div class="buttons-div"><a href="${facebookEventURL}" target="_blank" class="button transparent _25 w-button" style="min-width: 0 !important">More info</a></div>
 			         </div>
 			      </div>
@@ -226,6 +200,12 @@ function loadFeaturedEvent() {
 	.catch(error => {
 		console.warn(error);
 	});
+}
+
+function eventImageError(image) {
+	console.log("Event image failed to load! Someone probably deleted an event or made it private.");
+	//console.log(image);
+	image.parentNode.parentNode.parentNode.parentNode.style.display='none';
 }
 
 document.getElementById("find-chapter-btn").addEventListener("click", function(){
