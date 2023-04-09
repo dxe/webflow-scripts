@@ -144,8 +144,6 @@ function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag)
 			document.getElementById("event-items-wrapper").innerHTML += `
 				<div>
 			        <h3>No local events were found for your chapter.</h3>
-			        <p>But here are some online events:</p>
-			        <p>&nbsp;</p>
 			    </div>
 				`;
 		}
