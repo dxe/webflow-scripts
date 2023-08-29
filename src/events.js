@@ -225,17 +225,22 @@ function updateSelectedChapter(
           featuredEvent.StartTime,
         ).toLocaleDateString(undefined, dateOptions);
         const facebookEventURL = `https://www.facebook.com/${featuredEvent.ID}`;
-        featuredEvent.Cover ??=
-          "https://dxe-static.s3-us-west-1.amazonaws.com/img/default_cover.jpg";
         const featuredEventElement = ` 
 			<div class="full-container full">
 			   <div class="columns w-row">
-			      <div class="column-9 w-col w-col-6 w-col-stack"><a href="${featuredEvent.EventbriteURL}" target="_blank"><img src="${featuredEvent.Cover}" class="image-5"></a></div>
+			      <div class="column-9 w-col w-col-6 w-col-stack"><a href="${
+              featuredEvent.EventbriteURL
+            }" target="_blank"><img src="${
+              featuredEvent.Cover ??
+              "https://dxe-static.s3-us-west-1.amazonaws.com/img/default_cover.jpg"
+            }" class="image-5"></a></div>
 			      <div class="column-10 w-col w-col-6 w-col-stack">
 			         <div class="campaign-div transparent">
 			            <div class="tag-line">Featured event</div>
 			            <h2 class="header">${featuredEvent.Name}</h2>
-			            <p class="paragraph limit">${localStartDate}<br />${featuredEvent.LocationName}</p>
+			            <p class="paragraph limit">${localStartDate}<br />${
+                    featuredEvent.LocationName
+                  }</p>
 			            <div class="buttons-div"><a href="${facebookEventURL}" target="_blank" class="button transparent _25 w-button" style="min-width: 0 !important">More info</a></div>
 			         </div>
 			      </div>
