@@ -24,6 +24,13 @@ Date.prototype.addHours = function(h) {
   return this;
 }
 
+const dateOptions = {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+};
+
 // function to extract 12-hour time from date (source: https://stackoverflow.com/questions/8888491/how-do-you-display-javascript-datetime-in-12-hour-am-pm-format)
 function formatAMPM(date) {
   var hours = date.getHours();
@@ -171,14 +178,15 @@ function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag)
 			    </div>
 				`;
 		})
-		// featured event
-		const featuredEvent = eventData.events.find(it => it.Featured);
-		if (!featuredEvent) return;
-		const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-		let localStartDate = new Date(featuredEvent.StartTime).toLocaleDateString(undefined, dateOptions);
-		let facebookEventURL = `https://www.facebook.com/${featuredEvent.ID}`;
-		if (!featuredEvent.Cover) featuredEvent.Cover = 'https://dxe-static.s3-us-west-1.amazonaws.com/img/default_cover.jpg';
-		let featuredEventElement = `
+		// featured events
+      const featuredEvents = eventData.events.filter((it) => it.Featured);
+      featuredEvents.map((featuredEvent) => {
+        const localStartDate = new Date(
+          featuredEvent.StartTime,
+        ).toLocaleDateString(undefined, dateOptions);
+        const facebookEventURL = `https://www.facebook.com/${featuredEvent.ID}`;
+		featuredEvent.Cover ??= "https://dxe-static.s3-us-west-1.amazonaws.com/img/default_cover.jpg"
+        const featuredEventElement = ` 
 			<div class="full-container full">
 			   <div class="columns w-row">
 			      <div class="column-9 w-col w-col-6 w-col-stack"><a href="${featuredEvent.EventbriteURL}" target="_blank"><img src="${featuredEvent.Cover}" class="image-5"></a></div>
@@ -190,10 +198,10 @@ function updateSelectedChapter(chapterName, chapterID, facebookURL, chapterFlag)
 			            <div class="buttons-div"><a href="${facebookEventURL}" target="_blank" class="button transparent _25 w-button" style="min-width: 0 !important">More info</a></div>
 			         </div>
 			      </div>
-			   </div>
-			</div>
-		`
-		$("div.hero-section").append(featuredEventElement);
+			   </div> 
+			</div> 
+		`;
+        $("div.hero-section").append(featuredEventElement);
 	})
 	.catch(error => {
 		console.warn(error);
