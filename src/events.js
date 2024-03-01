@@ -228,9 +228,7 @@ function updateSelectedChapter(
         const featuredEventElement = ` 
 			<div class="full-container full">
 			   <div class="columns w-row">
-			      <div class="column-9 w-col w-col-6 w-col-stack"><a href="${
-              featuredEvent.EventbriteURL
-            }" target="_blank"><img src="${
+			      <div class="column-9 w-col w-col-6 w-col-stack"><a href="${facebookEventURL}" target="_blank"><img src="${
               featuredEvent.Cover ??
               "https://dxe-static.s3-us-west-1.amazonaws.com/img/default_cover.jpg"
             }" class="image-5"></a></div>
