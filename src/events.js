@@ -138,7 +138,7 @@ function updateSelectedChapter(
   document.getElementById("event-items-wrapper").innerHTML = "";
   // update event listing shown using chapter fb id
   let startTime = new Date().addHours(-1).toISOString();
-  let endtime = new Date().addHours(2160).toISOString();
+  let endtime = new Date().addHours(180 * 24).toISOString();
   fetch(
     `https://adb.dxe.io/external_events/${chapterID}?start_time=${startTime}&end_time=${endtime}`,
   )
