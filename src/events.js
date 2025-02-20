@@ -101,6 +101,7 @@ $(document).ready(function () {
 
 function updateSelectedChapter(
   chapterName,
+  // Note: in ADB, `chapterID` here is the same as the FB page id
   chapterID,
   facebookURL,
   chapterFlag,
