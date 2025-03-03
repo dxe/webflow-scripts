@@ -221,6 +221,8 @@ function updateSelectedChapter(
       });
       // featured events
       const featuredEvents = eventData.events.filter((it) => it.Featured);
+      const featuredEventsPlaceholder = $("#featured-events-placeholder");
+      featuredEventsPlaceholder.empty();
       featuredEvents.map((featuredEvent) => {
         const localStartDate = new Date(
           featuredEvent.StartTime,
@@ -246,7 +248,7 @@ function updateSelectedChapter(
 			   </div> 
 			</div> 
 		`;
-        $("div.hero-section").append(featuredEventElement);
+        featuredEventsPlaceholder.append(featuredEventElement);
       });
     })
     .catch((error) => {
