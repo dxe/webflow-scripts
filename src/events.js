@@ -227,7 +227,7 @@ function updateSelectedChapter(
         const localStartDate = new Date(
           featuredEvent.StartTime,
         ).toLocaleDateString(undefined, dateOptions);
-        const facebookEventURL = `https://www.facebook.com/${featuredEvent.ID}`;
+        const facebookEventURL = `https://www.facebook.com/events/${featuredEvent.ID}`;
         const featuredEventElement = ` 
 			<div class="full-container full">
 			   <div class="columns w-row">
