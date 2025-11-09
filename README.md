@@ -5,7 +5,8 @@ Scripts used by pages on main site on Webflow.
 Some scripts are imported globally. See usage here:
 https://webflow.com/dashboard/sites/dxe/custom-code
 
-Other scripts may be specific to a single page.
+Other scripts may be specific to a single page. This can be seen by going
+to the "custom code" section of the page's settings in the Webflow Designer.
 
 Note that some logic is duplicated across scripts for it to be available in
 multiple pages. For example, the home page and events page both load events.
