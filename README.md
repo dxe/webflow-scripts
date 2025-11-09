@@ -1,5 +1,15 @@
 # webflow-scripts
 
+Scripts used by pages on main site on Webflow.
+
+Some scripts are imported globally. See usage here:
+https://webflow.com/dashboard/sites/dxe/custom-code
+
+Other scripts may be specific to a single page.
+
+Note that some logic is duplicated across scripts for it to be available in
+multiple pages. For example, the home page and events page both load events.
+
 ## Updating scripts
 1. ```npm install``` to install deps.
 2. Edit scripts in **src** directory.
