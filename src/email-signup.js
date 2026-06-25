@@ -2,6 +2,8 @@ var emailForm = document.getElementById("email-form");
 
 if (emailForm) {
 
+    // TODO: this is firing automatically on Webflow password-protected pages, when the password is submitted.
+    // It should only fire when the user submits this specific signup form.
     emailForm.addEventListener("submit", function(event){
 
         event.preventDefault();
